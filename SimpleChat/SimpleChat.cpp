@@ -6,17 +6,13 @@
 #include "Endian.h"
 #include "WindowsSocket.h"
 #include "ServerSocket.h"
+#include "ClientSocket.h"
 
 enum Environment {
 	Exit,
 	Client,
 	Server
 };
-
-//class Client {
-//private:
-//	struct socketaddr socketData;
-//};
 
 int main()
 {

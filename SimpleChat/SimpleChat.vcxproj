@@ -143,6 +143,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ClientSocket.cpp" />
     <ClCompile Include="Endian.cpp" />
     <ClCompile Include="RedUtility.cpp" />
     <ClCompile Include="ServerSocket.cpp" />
@@ -150,6 +151,7 @@
     <ClCompile Include="WindowsSocket.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ClientSocket.h" />
     <ClInclude Include="Endian.h" />
     <ClInclude Include="RedUtility.h" />
     <ClInclude Include="ServerSocket.h" />
