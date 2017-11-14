@@ -6,6 +6,7 @@
 #include <ws2tcpip.h>
 
 #include "RedUtility.h"
+#include "Endian.h"
 
 #pragma comment (lib, "Ws2_32.lib")
 
@@ -39,30 +40,6 @@ enum Environment {
 	Exit,
 	Client,
 	Server
-};
-
-class Endian {
-private:
-	
-public:
-	enum {
-		Little,
-		Big
-	};
-	int get() {
-		// big endian prefers the smallest address of byte order
-		int endianType = Big;
-
-		int var = 0x12345678;
-		unsigned char *chr = (unsigned char*)(&var);
-
-		// little endian prefers the biggest address of byte order
-		if (*chr == 78) {
-			endianType = Little;
-		}
-
-		return endianType;
-	}
 };
 
 //class Client {
