@@ -37,6 +37,6 @@ int main()
 		break;
 	}
 
-	red::pause();
+	red::pause(L"Exit program...");
     return 0;
 }
