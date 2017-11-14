@@ -24,12 +24,18 @@
     <ClCompile Include="Endian.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="WindowsSocket.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="RedUtility.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="Endian.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="WindowsSocket.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

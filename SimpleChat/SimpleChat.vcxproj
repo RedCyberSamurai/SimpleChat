@@ -146,10 +146,12 @@
     <ClCompile Include="Endian.cpp" />
     <ClCompile Include="RedUtility.cpp" />
     <ClCompile Include="SimpleChat.cpp" />
+    <ClCompile Include="WindowsSocket.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Endian.h" />
     <ClInclude Include="RedUtility.h" />
+    <ClInclude Include="WindowsSocket.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

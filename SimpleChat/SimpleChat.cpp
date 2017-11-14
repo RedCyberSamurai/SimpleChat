@@ -2,39 +2,9 @@
 #include <string>
 #include <sstream>
 
-#include <Winsock2.h>
-#include <ws2tcpip.h>
-
 #include "RedUtility.h"
 #include "Endian.h"
-
-#pragma comment (lib, "Ws2_32.lib")
-
-class WindowsSocket{
-private:
-	WSADATA wsaData;
-	int socketStatus;
-public:
-	WindowsSocket() {
-		this->socketStatus = WSAStartup(MAKEWORD(2, 2), &this->wsaData);
-	}
-
-	bool isSupported() {
-		if (this->socketStatus != 0) {
-			return false;
-		}
-
-		return true;
-	}
-
-	int getStatus() {
-		return this->socketStatus;
-	}
-
-	void terminate() {
-		WSACleanup();
-	}
-};
+#include "WindowsSocket.h"
 
 enum Environment {
 	Exit,
