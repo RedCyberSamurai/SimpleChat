@@ -5,38 +5,9 @@
 #include <Winsock2.h>
 #include <ws2tcpip.h>
 
+#include "RedUtility.h"
+
 #pragma comment (lib, "Ws2_32.lib")
-
-static void pause() {
-	std::string s;
-	getline(std::cin, s);
-}
-
-static void writeLine(const char* str) {
-	std::cout << str << std::endl;
-}
-
-static void writeLine(int i) {
-	std::cout << i << std::endl;
-}
-
-static int getInt(std::istream &stream) {
-	int value = -1;
-
-	while (stream) {
-		std::string line;
-		std::getline(stream, line);
-
-		std::stringstream ss(line);
-		if ((ss >> value)) {
-			break;
-		}
-
-		writeLine("Error - Your input has to be a number.");
-	}
-
-	return value;
-}
 
 class WindowsSocket{
 private:
@@ -175,12 +146,12 @@ int main()
 {
 	int env = -1;
 	do {
-		writeLine("# Choose your environment:");
-		writeLine("0 Exit");
-		writeLine("1 Client");
-		writeLine("2 Server");
+		red::writeLine("# Choose your environment:");
+		red::writeLine("0 Exit");
+		red::writeLine("1 Client");
+		red::writeLine("2 Server");
 
-		env = getInt(std::cin);
+		env = red::getInt(std::cin);
 		
 
 	} while (env < 0);
@@ -198,7 +169,7 @@ int main()
 
 	WindowsSocket ws;
 	if (!ws.isSupported()) {
-		writeLine("Windows socket not supported: " + ws.getStatus());
+		red::writeLine("Windows socket not supported: " + ws.getStatus());
 		std::cin.get();
 		return 1;
 	}
@@ -206,7 +177,7 @@ int main()
 	ServerSocket ss(ws);
 	ss.start();
 
-	pause();
+	red::pause();
 
     return 0;
 }
