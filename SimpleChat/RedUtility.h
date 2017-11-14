@@ -1,12 +1,11 @@
 #pragma once
-
 #include <iostream>
 #include <string>
 #include <sstream>
 
 namespace red {
-	static void pause();
-	static void writeLine(const char* str);
-	static void writeLine(int i);
-	static int getInt(std::istream &stream);
+	void pause();
+	void writeLine(const char* str);
+	void writeLine(int i);
+	int getInt(std::istream &stream);
 }

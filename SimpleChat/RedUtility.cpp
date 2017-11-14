@@ -2,19 +2,19 @@
 
 // Console input and output utilities
 namespace red {
-	static void pause() {
+	void pause() {
 		std::cin.get();
 	}
 
-	static void writeLine(const char* str) {
+	void writeLine(const char* str) {
 		std::cout << str << std::endl;
 	}
 
-	static void writeLine(int i) {
+	void writeLine(int i) {
 		std::cout << i << std::endl;
 	}
 
-	static int getInt(std::istream &stream) {
+	int getInt(std::istream &stream) {
 		int value = -1;
 
 		while (stream) {

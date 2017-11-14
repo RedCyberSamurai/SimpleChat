@@ -1,55 +1,42 @@
-#include <iostream>
-#include <string>
-#include <sstream>
-
 #include "RedUtility.h"
 #include "Endian.h"
-#include "WindowsSocket.h"
-#include "ServerSocket.h"
-#include "ClientSocket.h"
 
-enum Environment {
-	Exit,
-	Client,
-	Server
-};
+#include "Environment.h"
 
 int main()
 {
-	int env = -1;
+	int envChoice = -1;
 	do {
 		red::writeLine("# Choose your environment:");
 		red::writeLine("0 Exit");
 		red::writeLine("1 Client");
 		red::writeLine("2 Server");
 
-		env = red::getInt(std::cin);
-		
+		envChoice = red::getInt(std::cin);
+	} while (envChoice < 0);
 
-	} while (env < 0);
-
-	switch (env) {
-	case Environment::Exit:
-		break;
-	case Environment::Client:
-		break;
-	case Environment::Server:
-		break;
-	default:
-		break;
-	}
+	Environment env;
 
 	WindowsSocket ws;
 	if (!ws.isSupported()) {
 		red::writeLine("Windows socket not supported: " + ws.getStatus());
-		std::cin.get();
+
+		red::pause();
 		return 1;
 	}
 
-	ServerSocket ss(ws);
-	ss.start();
+	switch (envChoice) {
+	case Environment::Client:
+		env.createClient(ws);
+		break;
+	case Environment::Server:
+		env.createServer(ws);
+		break;
+	default:
+	case Environment::Exit:
+		break;
+	}
 
 	red::pause();
-
     return 0;
 }
