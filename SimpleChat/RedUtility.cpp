@@ -2,16 +2,25 @@
 
 // Console input and output utilities
 namespace red {
-	void pause() {
+	void pause(const wchar_t *msg) {
+		std::wcout << msg << std::endl;
 		std::cin.get();
 	}
 
-	void writeLine(const char* str) {
-		std::cout << str << std::endl;
+	void pause() {
+		pause(L"Press Enter to continue...");
+	}
+
+	void writeLine(const wchar_t *msg, int status) {
+		std::wcout << msg << status << std::endl;
+	}
+
+	void writeLine(const wchar_t *msg) {
+		std::wcout << msg << std::endl;
 	}
 
 	void writeLine(int i) {
-		std::cout << i << std::endl;
+		std::wcout << i << std::endl;
 	}
 
 	int getInt(std::istream &stream) {
@@ -26,7 +35,7 @@ namespace red {
 				break;
 			}
 
-			writeLine("Error - Your input has to be a number.");
+			writeLine(L"Error - Your input has to be a number.");
 		}
 
 		return value;
