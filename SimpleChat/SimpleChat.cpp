@@ -32,8 +32,8 @@ int main()
 	case Environment::Server:
 		env.createServer(ws);
 		break;
-	default:
 	case Environment::Exit:
+	default:
 		break;
 	}
 
