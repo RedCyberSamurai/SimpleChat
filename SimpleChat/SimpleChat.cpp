@@ -1,5 +1,4 @@
 #include "RedUtility.h"
-#include "Endian.h"
 
 #include "Environment.h"
 
