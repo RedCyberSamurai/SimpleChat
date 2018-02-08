@@ -7,5 +7,6 @@ void Environment::createServer(WindowsSocket &ws) {
 
 void Environment::createClient(WindowsSocket &ws)
 {
-	// TODO
+	ClientSocket cs(ws);
+	cs.start();
 }
