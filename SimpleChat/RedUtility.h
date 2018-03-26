@@ -4,10 +4,11 @@
 #include <sstream>
 
 namespace red {
-	void pause(const wchar_t *msg);
+	void clearConsole();
+	void pause(std::wstring msg);
 	void pause();
-	void writeLine(const wchar_t *msg, int status);
-	void writeLine(const wchar_t *msg);
+	void writeLine(std::wstring msg, int status);
+	void writeLine(std::wstring msg);
 	void writeLine(int i);
-	int getInt(std::istream &stream);
+	int getInt(std::wistream &stream);
 }
