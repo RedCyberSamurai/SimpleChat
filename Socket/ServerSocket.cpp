@@ -1,7 +1,6 @@
 #include "ServerSocket.h"
 
-ServerSocket::ServerSocket(WindowsSocket &ws) : file("./settings/server.cfg") {
-	this->ws = &ws;
+ServerSocket::ServerSocket() : file("./settings/server.cfg") {
 }
 
 int ServerSocket::start() {
@@ -15,9 +14,7 @@ int ServerSocket::start() {
 	// resolve address
 	int resolveStatus = getaddrinfo(NULL, this->port, &this->address, &this->result);
 	if (resolveStatus != 0) {
-		this->lastError = resolveStatus;
-		printf("Could not resolve server address and port: %d\n", resolveStatus);
-		ws->terminate();
+		this->setLastError(resolveStatus);
 		return RESOLVE_ERROR;
 	}
 
@@ -26,10 +23,8 @@ int ServerSocket::start() {
 	// create socket listener
 	this->listener = socket(this->result->ai_family, this->result->ai_socktype, this->result->ai_protocol);
 	if (this->listener == INVALID_SOCKET) {
-		this->lastError = WSAGetLastError();
-		printf("Could not start the listener: %d\n", this->lastError);
+		this->setLastError(WSAGetLastError());
 		freeaddrinfo(result);
-		this->ws->terminate();
 		return LISTEN_ERROR;
 	}
 
@@ -38,11 +33,9 @@ int ServerSocket::start() {
 	// bind server
 	int bindStatus = bind(this->listener, this->result->ai_addr, (int)this->result->ai_addrlen);
 	if (bindStatus == SOCKET_ERROR) {
-		this->lastError = WSAGetLastError();
-		printf("Could not bind the socket to the given address and port: %d\n", this->lastError);
+		this->setLastError(WSAGetLastError());
 		freeaddrinfo(this->result);
 		closesocket(this->listener);
-		this->ws->terminate();
 		return BIND_ERROR;
 	}
 
@@ -50,10 +43,8 @@ int ServerSocket::start() {
 
 	// listen socket
 	if (listen(this->listener, SOMAXCONN) == SOCKET_ERROR) {
-		this->lastError = WSAGetLastError();
-		printf("Could not listen to socket connection: %d\n", this->lastError);
+		this->setLastError(WSAGetLastError());
 		closesocket(this->listener);
-		this->ws->terminate();
 		return LISTEN_SOCKET_ERROR;
 	}
 
@@ -63,7 +54,6 @@ int ServerSocket::start() {
 	this->client = accept(this->listener, NULL, NULL);
 	if (this->client == INVALID_SOCKET) {
 		closesocket(this->listener);
-		this->ws->terminate();
 		return ACCEPT_ERROR;
 	}
 
@@ -81,10 +71,8 @@ int ServerSocket::start() {
 
 			response = send(this->client, recieveBuffer, request, 0);
 			if (response == SOCKET_ERROR) {
-				this->lastError = WSAGetLastError();
-				printf("Response failed: %d\n", this->lastError);
+				this->setLastError(WSAGetLastError());
 				closesocket(this->client);
-				this->ws->terminate();
 
 				return RESPONSE_ERROR;
 			}
@@ -97,10 +85,8 @@ int ServerSocket::start() {
 		}
 
 		if (request == SOCKET_ERROR) {
-			this->lastError = WSAGetLastError();
-			printf("Request failed: %d\n", this->lastError);
+			this->setLastError(WSAGetLastError());
 			closesocket(this->client);
-			this->ws->terminate();
 
 			return REQUEST_ERROR;
 		}
@@ -111,10 +97,8 @@ int ServerSocket::start() {
 	// shutdown
 	int closeServer = shutdown(this->client, SD_SEND);
 	if (closeServer == SOCKET_ERROR) {
-		this->lastError = WSAGetLastError();
-		printf("Shutdown failed: %d\n", this->lastError);
+		this->setLastError(WSAGetLastError());
 		closesocket(this->client);
-		this->ws->terminate();
 
 		return SHUTDOWN_ERROR;
 	}
@@ -122,8 +106,6 @@ int ServerSocket::start() {
 	printf("Server shutdown.\n");
 
 	closesocket(this->client);
-	this->ws->terminate();
-
 	printf("Server closed.\n");
 	return SOCKET_VALID;
 }

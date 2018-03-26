@@ -32,15 +32,17 @@ int main()
 
 	switch (envChoice) {
 	case Environment::Client:
-		env.createClient(ws);
+		env.createClient();
 		break;
 	case Environment::Server:
-		env.createServer(ws);
+		env.createServer();
 		break;
 	case Environment::Exit:
 	default:
 		break;
 	}
+
+	ws.terminate();
 
 	red::pause(L"Exit program...");
     return 0;

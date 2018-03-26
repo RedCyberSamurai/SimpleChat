@@ -115,10 +115,12 @@
   <ItemGroup>
     <ClInclude Include="ClientSocket.h" />
     <ClInclude Include="ServerSocket.h" />
+    <ClInclude Include="ISocket.h" />
     <ClInclude Include="WindowsSocket.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ClientSocket.cpp" />
+    <ClCompile Include="ISocket.cpp" />
     <ClCompile Include="ServerSocket.cpp" />
     <ClCompile Include="WindowsSocket.cpp" />
   </ItemGroup>

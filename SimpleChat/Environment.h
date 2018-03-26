@@ -7,6 +7,8 @@ class Environment {
 private:
 public:
 	enum { Exit, Client, Server };
-	void createServer(WindowsSocket &ws);
-	void createClient(WindowsSocket &ws);
+	void createServer();
+	void createClient();
+
+	void reportStatus(int status, int error);
 };
