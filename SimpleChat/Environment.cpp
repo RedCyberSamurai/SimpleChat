@@ -3,7 +3,7 @@
 void Environment::createServer() {
 	ServerSocket ss;
 	int status = ss.start();
-	if (status != ServerSocket::SOCKET_VALID) {
+	if (status != ISocket::SOCKET_VALID) {
 		this->reportStatus(status, ss.getLastError());
 	}
 }
@@ -12,7 +12,7 @@ void Environment::createClient()
 {
 	ClientSocket cs;
 	int status = cs.start();
-	if (status != ClientSocket::SOCKET_VALID) {
+	if (status != ISocket::SOCKET_VALID) {
 		this->reportStatus(status, cs.getLastError());
 	}
 }
