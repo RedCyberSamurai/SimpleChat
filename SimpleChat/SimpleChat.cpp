@@ -11,7 +11,13 @@ int main()
 		red::writeLine(L"1 Client");
 		red::writeLine(L"2 Server");
 
-		envChoice = red::getInt(std::cin);
+		try {
+			envChoice = red::getInt(std::wcin);
+		}
+		catch (std::exception e) {
+			red::clearConsole();
+			red::writeLine(L"Error - Your input has to be a number.");
+		}
 	} while (envChoice < 0);
 
 	Environment env;
